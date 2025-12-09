@@ -2,14 +2,14 @@ from fastapi import APIRouter, HTTPException, status
 from models.schemas import ProductCreate, ProductResponse
 
 router = APIRouter(
-    prefix="/product",
-    tags=["Product"]
+    prefix="/products",
+    tags=["Products"]
 )
 
 bst_products = None
 persistence = None
 
-@router.get("/", response_model=ProductResponse, status_code=status.HTTP_200_OK)
+@router.get("/", status_code=status.HTTP_200_OK)
 async def get_list_products():
     products = bst_products.list_all()
 

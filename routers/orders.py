@@ -1,5 +1,5 @@
 from fastapi import APIRouter, HTTPException, status
-from schemas import OrderCreate, OrderUpdate, OrderResponse
+from models.schemas import OrderCreate, OrderUpdate, OrderResponse
 
 router = APIRouter(
     prefix="/orders",
@@ -11,6 +11,16 @@ linked_list_orders = None
 bst_products = None
 persistence = None
 
+@router.get("/")
+async def list_orders():
+    """
+    List all orders
+    """
+    orders = linked_list_orders.list_all()
+    return {
+        "total": len(orders),
+        "orders": orders
+    }
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_order(order: OrderCreate):
@@ -122,16 +132,4 @@ async def delete_order(order_id: int):
     
     return {
         "message": f"Order {order_id} deleted successfully"
-    }
-
-
-@router.get("/")
-async def list_orders():
-    """
-    List all orders
-    """
-    orders = linked_list_orders.list_all()
-    return {
-        "total": len(orders),
-        "orders": orders
     }

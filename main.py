@@ -5,7 +5,7 @@ from contextlib import asynccontextmanager
 
 
 # Import routers modules (to inject dependencies)
-from routers import product, order
+from routers import orders, products
 
 # Import data structures
 from bst_products import BST_Products
@@ -39,15 +39,15 @@ app = FastAPI(
     lifespan=lifespan  
 )
 
-product.bst_products = bst_products
-product.persistence = persistence
+products.bst_products = bst_products
+products.persistence = persistence
 
-order.linked_list_orders = linked_list_orders
-order.bst_products = bst_products
-order.persistence = persistence
+orders.linked_list_orders = linked_list_orders
+orders.bst_products = bst_products
+orders.persistence = persistence
 
-app.include_router(product)
-app.include_router(order)
+app.include_router(products.router)
+app.include_router(orders.router)
 
 
 @app.get("/")
