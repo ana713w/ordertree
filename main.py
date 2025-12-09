@@ -25,14 +25,14 @@ async def lifespan(app: FastAPI):
     # STARTUP - Load data
     persistence.load_products(bst_products)
     persistence.load_orders(linked_list_orders, bst_products)
-    print("🚀 API started successfully")
+    print("API started successfully")
     
     yield 
     
     # SHUTDOWN - Save data
     persistence.save_products(bst_products)
     persistence.save_orders(linked_list_orders)
-    print("💾 Data saved successfully")
+    print("Data saved successfully")
 
 
 app = FastAPI(

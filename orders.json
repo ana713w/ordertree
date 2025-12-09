@@ -1,1 +1,18 @@
-[]
+[
+  {
+    "id": 1,
+    "client": "Juan Pérez",
+    "products": [
+      {
+        "product_id": 1,
+        "quantity": 2
+      },
+      {
+        "product_id": 2,
+        "quantity": 1
+      }
+    ],
+    "date": "2025-12-09T20:32:00.230566",
+    "total": 2799.97
+  }
+]
