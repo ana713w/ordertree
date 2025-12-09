@@ -20,6 +20,12 @@ class ProductCreate(BaseModel):
             }
         }
 
+class ProductResponse(BaseModel):
+    id: int
+    name: str
+    price: float
+    stock: int
+
 
 class ProductItemOrder(BaseModel):
     """
@@ -53,3 +59,14 @@ class OrderUpdate(BaseModel):
     Model to update an order
     """
     products: List[ProductItemOrder]
+
+
+class OrderResponse(BaseModel):
+    """
+    Order response model
+    """
+    id: int
+    client: str
+    products: List[dict]
+    date: str
+    total: float
