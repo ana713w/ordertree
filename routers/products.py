@@ -20,9 +20,6 @@ async def get_list_products():
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_product(product: ProductCreate):
-    """
-    Create a new product in BST
-    """
     if bst_products.search(product.id):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
@@ -39,9 +36,6 @@ async def create_product(product: ProductCreate):
 
 @router.get("/{product_id}", response_model=ProductResponse, status_code=status.HTTP_200_OK)
 async def get_product(product_id: int):
-    """
-    Get product by ID - BST search O(log n)
-    """
     product = bst_products.search(product_id)
     
     if not product:

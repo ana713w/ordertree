@@ -1,25 +1,16 @@
-"""
-Linked List for order management
-"""
 from datetime import datetime
 
 
 class OrderNode:
-    """
-    Represents one order in the linked list
-    """
     def __init__(self, order_id, client, products):
         self.id = order_id
         self.client = client
-        self.products = products  # List of {'product_id': X, 'quantity': Y}
+        self.products = products 
         self.date = datetime.now().isoformat()
         self.total = 0.0
-        self.next = None  # Link to next order
+        self.next = None 
     
     def to_dict(self):
-        """
-        Convert order to dictionary for JSON
-        """
         return {
             "id": self.id,
             "client": self.client,
@@ -30,22 +21,11 @@ class OrderNode:
 
 
 class LinkedList_Orders:
-    """
-    Linked List to manage orders
-    """
     def __init__(self):
         self.head = None  # First order
         self.counter_id = 1  # Auto-increment ID
     
     def add_order(self, client, products, bst_products):
-        """
-        Add a new order to the end of the list
-        
-        Parameters:
-        - client: client name
-        - products: list of {'product_id': X, 'quantity': Y}
-        - bst_products: BST to search products and calculate total
-        """
         new_order = OrderNode(self.counter_id, client, products)
         
         # Calculate order total using BST
@@ -69,9 +49,6 @@ class LinkedList_Orders:
         return new_order
     
     def search_order(self, order_id):
-        """
-        Search for an order by ID
-        """
         current = self.head
         while current:
             if current.id == order_id:
@@ -80,9 +57,6 @@ class LinkedList_Orders:
         return None
     
     def update_order(self, order_id, new_products, bst_products):
-        """
-        Update products in an existing order
-        """
         order = self.search_order(order_id)
         if order:
             order.products = new_products
@@ -99,9 +73,6 @@ class LinkedList_Orders:
         return None
     
     def delete_order(self, order_id):
-        """
-        Delete an order from the list
-        """
         if self.head is None:
             return False
         
@@ -121,9 +92,6 @@ class LinkedList_Orders:
         return False
     
     def list_all(self):
-        """
-        Return all orders as list of dictionaries
-        """
         orders = []
         current = self.head
         while current:
@@ -132,15 +100,9 @@ class LinkedList_Orders:
         return orders
     
     def to_list(self):
-        """
-        Convert linked list to Python list for JSON serialization
-        """
         return self.list_all()
     
     def from_list(self, orders_list, bst_products):
-        """
-        Rebuild linked list from list (deserialization)
-        """
         self.head = None
         self.counter_id = 1
         

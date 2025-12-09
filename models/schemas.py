@@ -2,9 +2,6 @@ from pydantic import BaseModel
 from typing import List
 
 class ProductCreate(BaseModel):
-    """
-    Model to create a product
-    """
     id: int
     name: str
     price: float
@@ -28,17 +25,11 @@ class ProductResponse(BaseModel):
 
 
 class ProductItemOrder(BaseModel):
-    """
-    Product inside an order
-    """
     product_id: int
     quantity: int
 
 
 class OrderCreate(BaseModel):
-    """
-    Model to create an order
-    """
     client: str
     products: List[ProductItemOrder]
     
@@ -55,16 +46,10 @@ class OrderCreate(BaseModel):
 
 
 class OrderUpdate(BaseModel):
-    """
-    Model to update an order
-    """
     products: List[ProductItemOrder]
 
 
 class OrderResponse(BaseModel):
-    """
-    Order response model
-    """
     id: int
     client: str
     products: List[dict]

@@ -1,4 +1,3 @@
-
 class ProductNode:
     def __init__(self, product_id, name, price, stock):
         self.id = product_id 

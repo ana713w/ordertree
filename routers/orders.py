@@ -13,9 +13,6 @@ persistence = None
 
 @router.get("/")
 async def list_orders():
-    """
-    List all orders
-    """
     orders = linked_list_orders.list_all()
     return {
         "total": len(orders),
@@ -24,9 +21,6 @@ async def list_orders():
 
 @router.post("/", status_code=status.HTTP_201_CREATED)
 async def create_order(order: OrderCreate):
-    """
-    Create new order in Linked List
-    """
     # Validate products exist in BST
     for item in order.products:
         product = bst_products.search(item.product_id)
@@ -62,9 +56,6 @@ async def create_order(order: OrderCreate):
 
 @router.get("/{order_id}", response_model=OrderResponse)
 async def get_order(order_id: int):
-    """
-    Get order by ID
-    """
     order = linked_list_orders.search_order(order_id)
     
     if not order:
@@ -78,9 +69,6 @@ async def get_order(order_id: int):
 
 @router.put("/{order_id}")
 async def update_order(order_id: int, data: OrderUpdate):
-    """
-    Update order products
-    """
     order = linked_list_orders.search_order(order_id)
     if not order:
         raise HTTPException(
@@ -117,9 +105,6 @@ async def update_order(order_id: int, data: OrderUpdate):
 
 @router.delete("/{order_id}")
 async def delete_order(order_id: int):
-    """
-    Delete order from linked list
-    """
     deleted = linked_list_orders.delete_order(order_id)
     
     if not deleted:
